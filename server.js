@@ -27,7 +27,7 @@ app.get('/', function(request, response) {
     var result = 'App is running'
     response.send(result);
 }).listen(app.get('port'), function() {
-    console.log('App is running, server is listening on port ', app.get('port'));
+    res.render('index', { title: 'Recipes', message: '', menuoptions: menuoptions });
 });
 
 // GET response for '/'
