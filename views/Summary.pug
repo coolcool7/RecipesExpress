@@ -15,12 +15,14 @@ block content
                 .widget
                     label(for='Story Behind') Story Behind
                     h3 <br /><br />#{data[0].story}
+            div.wrapper
 
                 form(method='post' action='/deleteRecord')
 
                     div.form-group
                         input#input_name(type="hidden", placeholder="", name="id", value=data[0]._id.toHexString())
                         button.btn.btn-delete(type='delete') Delete
+
 
                 form(method='post' action='/editRecord')
                     div.form-group
