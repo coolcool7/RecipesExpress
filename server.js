@@ -135,20 +135,18 @@ app.post('/editRecord', async(req, res) => {
 
     var name = req.body.name;
     var by =req.body.by;
+    var id = req.body.id;
     //var category =req.body.Category;
     var story =req.body.story;
     var instructions =req.body.instructions;
 
     var data = {
+        "id" : id,
         "name": name,
         "by": by,
         "story": story,
         "instructions": instructions
     }
-
-
-    //console.log(data)
-
 
     res.render('edit', { title: 'edit', menuoptions: menuoptions , categories: categories, data});
 
@@ -237,6 +235,59 @@ app.post('/AddRecipe', async(req, res) => {
         res.render('details', { title: 'Recipes', message: 'Thanks for contributing a new recipe!!', menuoptions: menuoptions ,data});
 
     });
+
+})
+
+app.post('/UpdateRecipe', async(req, res) => {
+
+    try {
+
+        let connectedDb = await conn.connect();
+        db = connectedDb;
+
+        var name = req.body.RecipeName;
+        var id = req.body.id;
+        var by = req.body.ContributedBy;
+        var story = req.body.Story;
+        var instructions = req.body.Instructions;
+
+        var id = require('mongodb').ObjectID(id);
+
+        let query = {
+            _id: id,
+        };
+
+
+        var data = {
+            "name": name,
+            "by": by,
+            "story": story,
+            "instructions": instructions
+        }
+
+
+        let update = {
+            '$set': data
+        };
+
+        console.log(update);
+
+        console.log(query);
+        await conn.updateData('recipes', query, update);
+
+        //return response.status(200).send(finalArtemisInfo);
+        res.render('details', {
+            title: 'Recipes',
+            message: 'Thanks for contributing a new recipe!!',
+            menuoptions: menuoptions,
+            data
+        });
+
+    }catch (e) {
+        return response.status(500).send({
+            message: `Unexpected error occurred trying to create structure ${err}`
+        });
+    }
 
 })
 
