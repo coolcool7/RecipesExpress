@@ -25,7 +25,7 @@ app.set('port', (process.env.PORT || 5000));
 //For avoidong Heroku $PORT error
 app.get('/', function(request, response) {
     var result = 'App is running'
-    response.send(result);
+    res.render('index', { title: 'Recipes', message: '', menuoptions: menuoptions });
 }).listen(app.get('port'), function() {
     res.render('index', { title: 'Recipes', message: '', menuoptions: menuoptions });
 });
