@@ -13,7 +13,10 @@ block content
             div.col-md-4(style="float:left; text-align:justify; font-size:large; width:500px;")
                 img(src="/images/chef1.png" width="450" height="300")
             div.col-md-4(style="float:right; text-align:justify; font-size:large; width:650px;")
-                form(method='POST' action='/AddRecipe')
+                form(method='POST' action='/UpdateRecipe')
+                    div.form-group
+                        input#input_name(type="hidden", placeholder="", name="id", value=data.id)
+
                     div.form-group
                         label(for='RecipeName') Recipe Name
                         |&nbsp;&nbsp;
@@ -30,6 +33,7 @@ block content
                     div.form-group
                         label(for='Category') Category
                         <br />
+                        <br />
                         select(id="Category", name="Category")
                             each category in categories
                                 option(value=category.id) #{category}
@@ -41,6 +45,7 @@ block content
                     div.form-group
                         label(for='Story') Ingredients & Story Behind
                         <br />
+                        <br />
                         textarea(id='Story' name="Story", cols="70", rows="10")=data.story
                         <br />
 
@@ -48,9 +53,10 @@ block content
                     div.form-group
                         label(for='Instructions') Procedure..
                         <br />
+                        <br />
                         textarea(id='Instructions' name="Instructions", cols="70", rows="10",overflow-y: scroll;)=data.instructions
                         <br />
-                        button.btn.btn-primary(type='submit') Create Entry
+                        button.btn.btn-primary(type='submit') Edit
 
                     div#loadingDiv(width='100px' height='100px')
 

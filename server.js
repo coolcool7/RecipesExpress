@@ -108,7 +108,7 @@ app.get('/getSummary', async(req, res) => {
 app.post('/deleteRecord', async(req, res) => {
 
     //return res.status(200).send(req.body)
-    var id = require('mongodb').ObjectID(req.body._id);
+    var id = require('mongodb').ObjectID(req.body.id);
     console.log ('********* for delete')
 
     console.log (id)
@@ -246,13 +246,12 @@ app.post('/UpdateRecipe', async(req, res) => {
         db = connectedDb;
 
         var name = req.body.RecipeName;
-        var id = req.body.id;
+        var id = require('mongodb').ObjectID(req.body.id);
         var by = req.body.ContributedBy;
         var story = req.body.Story;
         var instructions = req.body.Instructions;
 
-        var id = require('mongodb').ObjectID(id);
-
+        console.log("****** update")
         let query = {
             _id: id,
         };
@@ -273,15 +272,19 @@ app.post('/UpdateRecipe', async(req, res) => {
         console.log(update);
 
         console.log(query);
-        await conn.updateData('recipes', query, update);
+        await conn.updateData('recipes', query, update).then(function(){
+
+            res.render('details', {
+                title: 'Recipes',
+                message: 'Thanks for contributing a new recipe!!',
+                menuoptions: menuoptions,
+                data
+            });
+
+        })
 
         //return response.status(200).send(finalArtemisInfo);
-        res.render('details', {
-            title: 'Recipes',
-            message: 'Thanks for contributing a new recipe!!',
-            menuoptions: menuoptions,
-            data
-        });
+
 
     }catch (e) {
         return response.status(500).send({

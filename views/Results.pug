@@ -10,7 +10,9 @@ block content
 
             if results
                 each result in results
+                    <br />
                     li: a(href=`/getSummary/?id=${result._id}`)=`${result.name}`
+                    <br />
             else
                 p  Sorry no matches found...
 
