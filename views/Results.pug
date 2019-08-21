@@ -1,0 +1,16 @@
+extends layout
+
+block content
+
+    .sidebar
+        block sidebar
+
+    .primary
+        block primary
+
+            if results
+                each result in results
+                    li: a(href=`/getSummary/?id=${result._id}`)=`${result.name}`
+            else
+                p  Sorry no matches found...
+

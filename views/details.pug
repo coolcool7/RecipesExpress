@@ -1,0 +1,21 @@
+extends layout
+block content
+    .primary
+
+        h2= data.name
+
+        article
+
+            p Contributed By #{data.by}
+            p Category #{data.category}
+            div.col-md-4(style="float:left; text-align:justify; font-size:large; width:550px;")
+                label(for='Story Behind') Story Behind
+                h3 <br />#{data.story}
+
+            div.col-md-4(style="float:right; white-space: pre-wrap; font-size:large; width:450px; ext-align:justify;")
+                .widget
+                    label(for='Procedure') Procedure
+                    h3 <br />#{data.instructions}
+
+
+

@@ -1,0 +1,57 @@
+extends layout
+
+block content
+    div.container
+        div.col1
+            div.cheerLeader
+                //img(src="/images/chef1.png" width="450" height="300")
+                p Please enter your much valued recipe
+
+    .main.container
+        .row
+            .col-md-6.col-md-offset-3
+            div.col-md-4(style="float:left; text-align:justify; font-size:large; width:500px;")
+                img(src="/images/chef1.png" width="450" height="300")
+            div.col-md-4(style="float:right; text-align:justify; font-size:large; width:850px;")
+                form(method='POST' action='/AddRecipe')
+                    div.form-group
+                        label(for='RecipeName') Recipe Name
+                        |&nbsp;&nbsp;
+                        input.form-control(type='text' style="width:250px" id='RecipeName' placeholder='RecipeName' name='RecipeName')
+
+                    div.form-group
+                        <br /><br />
+                        label(for='ContributedBy') Contributed By
+                        |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        input.form-control(type='text' style="width:200px" id='ContributedBy' placeholder='ContributedBy' name='ContributedBy')
+
+                    p(style='white-space:pre;')
+
+                    div.form-group
+                        label(for='Category') Category
+                        <br />
+                        select(id="Category", name="Category")
+                            each category in categories
+                                option(value=category.id) #{category}
+
+                        <br />
+
+
+                    p(style='white-space:pre;')
+                    div.form-group
+                        label(for='Story') Ingredients & Story Behind
+                        <br /><br />
+                        textarea(id='Story' name="Story", cols="70", rows="10")
+                        <br /><br />
+
+
+                    div.form-group
+                        label(for='Instructions') Procedure..
+                        <br /><br />
+                        textarea(id='Instructions' name="Instructions", cols="70", rows="10")
+                        <br />
+                        button.btn.btn-primary(type='submit') Create Entry
+
+                    div#loadingDiv(width='100px' height='100px')
+
+

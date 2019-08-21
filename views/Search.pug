@@ -1,0 +1,55 @@
+extends layout
+
+block content
+    script.
+
+    var data = '#{names}'
+    script(type='text/javascript',src = 'https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js')
+    script(type='text/javascript', src='/js/someFile.js')
+
+
+    div.container
+        div.col1
+            div.cheerLeader
+
+                p Choose the category
+
+    .main.container
+        .row
+            .col-md-6.col-md-offset-3
+
+                form(method='POST' action='/findResults')
+                    p(style='white-space:pre;')
+
+                    div.form-group
+                        label(for='Category') Category
+                        <br />
+                        select(id="Category", name="Category")
+                            each category in categories
+                                option(value=category.id) #{category}
+
+                        input.type-ahead(type='text' style="width:250px" id='RecipeName' placeholder='RecipeName' name='RecipeName')
+
+                        <br />
+                        <br />
+
+
+                            <br />
+                            <br />
+                            <br />
+                            select(id="Recipe Name", name="Recipe Name")
+                                each name in names
+                                    option(value=name.id) #{name}
+
+                            <br />
+
+                    div.form-group
+
+                        button.btn.btn-primary(type='submit') Find
+
+                    div#loadingDiv(width='100px' height='100px')
+
+
+
+
+
