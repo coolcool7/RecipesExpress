@@ -20,7 +20,7 @@ let categories = menuFactory.getCategories();
 var namesObj = [];
 
 
-app.set('port', (process.env.PORT || 5000));
+var port = process.env.PORT || 3000;
 
 //For avoidong Heroku $PORT error
 // app.get('/', function(request, response) {
