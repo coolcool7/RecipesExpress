@@ -24,6 +24,7 @@ block content
                     div.form-group
                         label(for='Category') Category
                         <br />
+                        <br />
                         select(id="Category", name="Category")
                             each category in categories
                                 option(value=category.id) #{category}
@@ -34,6 +35,8 @@ block content
 
 
                     div.form-group
+                        <br />
+                        <br />
 
                         button.btn.btn-primary(type='submit') Find
 
