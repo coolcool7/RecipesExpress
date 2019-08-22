@@ -209,6 +209,33 @@ app.get('/Search', async (req, res) => {
     res.render('Search', { title: 'Search recipe', menuoptions: menuoptions , categories: categories, names: namesObj});
 });
 
+app.get('/View', async (req, res) => {
+  try {
+      let connectedDb = await conn.connect();
+      db = connectedDb;
+
+      let results = []
+
+      await conn.findData('recipes').then(function (values) {
+
+          for (var key in values) {
+              if (values[key].name) {
+                  console.log(values[key].name)
+                  results.push(values[key])
+              }
+          }
+      });
+
+      res.render('Results', {message: 'Results', title: 'Recipes', results: results, menuoptions: menuoptions});
+
+  }
+  catch (e) {
+      return response.status(500).send({
+          message: `Unexpected error occurred trying to create structure ${err}`
+      });
+  }
+});
+
 app.post('/AddRecipe', async(req, res) => {
 
     let connectedDb = await conn.connect();
